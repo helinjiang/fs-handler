@@ -35,7 +35,7 @@ function save(srcPath, savePath) {
  */
 function saveJSON(data, savePath) {
   return new Promise((resolve, reject) => {
-    fse.outputJsonAsync(path.resolve(savePath), data)
+    fse.outputJson(path.resolve(savePath), data)
       .then(() => {
         resolve(data);
       })
