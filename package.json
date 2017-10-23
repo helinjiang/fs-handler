@@ -4,7 +4,8 @@
   "description": "Handle file system by Node",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --compilers js:babel-core/register"
+    "test": "mocha --require babel-register",
+    "test-old-version": "mocha --compilers js:babel-core/register"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,7 @@
     "babel-core": "^6.26.0",
     "babel-preset-es2015-loose": "^8.0.0",
     "babel-preset-stage-0": "^6.24.1",
+    "babel-register": "^6.26.0",
     "chai": "^4.1.2",
     "mocha": "^4.0.1"
   }
