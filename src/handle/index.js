@@ -4,15 +4,15 @@ const fse = require('fs-extra');
 /**
  * 通过文件路径，将 mocker_modules 模块的结果保存为json文件。
  *
- * @param {String} srcPath 源文件的路径
  * @param {String} savePath 保存路径
+ * @param {String} srcPath 源文件的路径
  * @return {Promise}
  */
-function save(srcPath, savePath) {
+function save(savePath, srcPath) {
   return new Promise((resolve, reject) => {
     getResult(srcPath)
       .then((saveData) => {
-        saveJSON(saveData, savePath)
+        saveJSON(savePath, saveData)
           .then((data) => {
             resolve(data);
           })
@@ -29,11 +29,11 @@ function save(srcPath, savePath) {
 /**
  * 将 JSON 格式的对象保存为json文件。
  *
- * @param {Object} data 对象，plain object
  * @param {String} savePath 保存路径
+ * @param {Object} data 对象，plain object
  * @return {Promise}
  */
-function saveJSON(data, savePath) {
+function saveJSON(savePath, data) {
   return new Promise((resolve, reject) => {
     fse.outputJson(path.resolve(savePath), data)
       .then(() => {

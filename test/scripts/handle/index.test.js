@@ -16,7 +16,7 @@ describe('handle/index.js getResult()', () => {
   it('support json file', () => {
     return hanleIndex.getResult(path.join(BASE_PATH_FIXTURES, 'json-file.json'))
       .then((data) => {
-        expect(data).to.deep.equal({name: 'json-file.json', age: 16});
+        expect(data).to.deep.equal({ name: 'json-file.json', age: 16 });
       });
   });
 
@@ -24,7 +24,7 @@ describe('handle/index.js getResult()', () => {
     return hanleIndex.getResult(
       path.join(BASE_PATH_FIXTURES, 'return-plain-object.js'))
       .then((data) => {
-        expect(data).to.deep.equal({name: 'return-plain-object', age: 16});
+        expect(data).to.deep.equal({ name: 'return-plain-object', age: 16 });
       });
   });
 
@@ -32,7 +32,7 @@ describe('handle/index.js getResult()', () => {
     return hanleIndex.getResult(
       path.join(BASE_PATH_FIXTURES, 'return-function-pure.js'))
       .then((data) => {
-        expect(data).to.deep.equal({name: 'return-function-pure', age: 16});
+        expect(data).to.deep.equal({ name: 'return-function-pure', age: 16 });
       });
   });
 
@@ -40,7 +40,7 @@ describe('handle/index.js getResult()', () => {
     return hanleIndex.getResult(
       path.join(BASE_PATH_FIXTURES, 'return-promise.js'))
       .then((data) => {
-        expect(data).to.deep.equal({name: 'return-promise', age: 16});
+        expect(data).to.deep.equal({ name: 'return-promise', age: 16 });
       });
   });
 
@@ -48,7 +48,7 @@ describe('handle/index.js getResult()', () => {
     return hanleIndex.getResult(
       path.join(BASE_PATH_FIXTURES, 'return-function-promise.js'))
       .then((data) => {
-        expect(data).to.deep.equal({name: 'return-function-promise', age: 16});
+        expect(data).to.deep.equal({ name: 'return-function-promise', age: 16 });
       });
   });
 
@@ -69,7 +69,7 @@ describe('util/handle.js save() and saveJSON()', () => {
         age: 1
       };
 
-      return hanleIndex.saveJSON(data, TMP_SAVE_FILE)
+      return hanleIndex.saveJSON(TMP_SAVE_FILE, data)
         .then(() => {
           const newSavedFile = fse.readJsonSync(TMP_SAVE_FILE);
 
@@ -86,7 +86,7 @@ describe('util/handle.js save() and saveJSON()', () => {
       const EXPECTED_SAVE_FILE = path.join(BASE_PATH_EXPECTED,
         'return-plain-object.json');
 
-      return hanleIndex.save(SRC_FILE, TMP_SAVE_FILE)
+      return hanleIndex.save(TMP_SAVE_FILE, SRC_FILE)
         .then(() => {
           const newSavedFile = fse.readFileSync(TMP_SAVE_FILE, 'utf8');
           const expectedFile = fse.readFileSync(EXPECTED_SAVE_FILE, 'utf8');
@@ -101,7 +101,7 @@ describe('util/handle.js save() and saveJSON()', () => {
       const EXPECTED_SAVE_FILE = path.join(BASE_PATH_EXPECTED,
         'return-promise.json');
 
-      return hanleIndex.save(SRC_FILE, TMP_SAVE_FILE)
+      return hanleIndex.save(TMP_SAVE_FILE, SRC_FILE)
         .then(() => {
           const newSavedFile = fse.readFileSync(TMP_SAVE_FILE, 'utf8');
           const expectedFile = fse.readFileSync(EXPECTED_SAVE_FILE, 'utf8');
