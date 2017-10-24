@@ -1,10 +1,12 @@
 {
   "name": "fs-handler",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Handle file system by Node",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "test": "mocha"
+    "prepublish": "babel src -d lib",
+    "test": "mocha --require babel-register",
+    "test-old-version": "mocha --compilers js:babel-core/register"
   },
   "repository": {
     "type": "git",
@@ -25,6 +27,10 @@
     "walk-sync": "^0.3.2"
   },
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-es2015-loose": "^8.0.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-register": "^6.26.0",
     "chai": "^4.1.2",
     "mocha": "^4.0.1"
   }
