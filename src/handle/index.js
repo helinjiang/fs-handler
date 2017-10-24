@@ -2,15 +2,15 @@ const path = require('path');
 const fse = require('fs-extra');
 
 /**
- * 通过文件路径，将 mocker_modules 模块的结果保存为json文件。
+ * 获取模块文件的执行结果，并将结果保存在相应的路径下
  *
  * @param {String} savePath 保存路径
- * @param {String} srcPath 源文件的路径
+ * @param {String} modulePath 模块文件的路径
  * @return {Promise}
  */
-function save(savePath, srcPath) {
+function saveModule(savePath, modulePath) {
   return new Promise((resolve, reject) => {
-    getResult(srcPath)
+    getModuleResult(modulePath)
       .then((saveData) => {
         saveJSON(savePath, saveData)
           .then((data) => {
@@ -46,15 +46,13 @@ function saveJSON(savePath, data) {
 }
 
 /**
- * 通过文件路径获得将 mocker_modules 模块的结果对象
+ * 通过模块的路径，获取模块的执行结果
  *
  * @param {String} filePath 文件路径
- * @param {Object} [params] 透传的参数，如果mock module为函数的话，则它将作为函数的第一个参数
- * @param {Object} [req] express中的req对象，，如果mock module为函数的话，则它将作为函数的第二个参数
  *
  * @return {Promise}
  */
-function getResult(filePath, params, req) {
+function getModuleResult(filePath, ...props) {
   return new Promise((resolve, reject) => {
     /**
      * require mocker modules 之后的对象
@@ -64,7 +62,7 @@ function getResult(filePath, params, req) {
 
     if (typeof saveTarget === 'function') {
       // 如果传入的是方法，则执行方法
-      let saveObj = saveTarget(params, req);
+      let saveObj = saveTarget(...props);
 
       if (isPromiseObj(saveObj)) {
         // 获得了方法执行的结果之后，判断返回的为 Promise 的话则获取最终结果值
@@ -124,7 +122,7 @@ function isPromiseObj(obj) {
 }
 
 module.exports = {
-  save: save,
+  saveModule: saveModule,
   saveJSON: saveJSON,
-  getResult: getResult
+  getModuleResult: getModuleResult
 };
