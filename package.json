@@ -2,8 +2,9 @@
   "name": "fs-handler",
   "version": "0.0.2",
   "description": "Handle file system by Node",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
+    "prepublish": "babel src -d lib",
     "test": "mocha --require babel-register",
     "test-old-version": "mocha --compilers js:babel-core/register"
   },
