@@ -27,7 +27,9 @@ function getAll(paths, options) {
 }
 
 /**
- * 获得某个路径下的所有文件，不包含文件夹
+ * 获得某个路径下的所有文件，不包含文件夹。
+ * 返回一个数组，每个数组元素参考 [walk-sync](https://www.npmjs.com/package/walk-sync) 。
+ *
  * @param {String} paths 路径
  * @return {Array}
  */
