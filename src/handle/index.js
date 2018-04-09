@@ -53,13 +53,18 @@ function saveJSON(savePath, data) {
  * @return {Promise}
  */
 function getModuleResult(filePath, ...props) {
-  return new Promise((resolve, reject) => {
-    /**
-     * require mocker modules 之后的对象
-     * @type {Object | Function | Promise}
-     */
-    let saveTarget = requireModule(filePath);
+  return getTargetResult(requireModule(filePath), ...props);
+}
 
+/**
+ * 获得模块内容之后，计算出最终返回值
+ * 如果 `saveTarget` 是一个函数，则 `...props` 将作为该函数的参数传递进去
+ *
+ * @param {*} saveTarget 有可能是函数、对象或者普通字符串
+ * @return {Promise}
+ */
+function getTargetResult(saveTarget, ...props) {
+  return new Promise((resolve, reject) => {
     if (typeof saveTarget === 'function') {
       // 如果传入的是方法，则执行方法
       let saveObj = saveTarget(...props);
@@ -124,5 +129,6 @@ function isPromiseObj(obj) {
 module.exports = {
   saveModule: saveModule,
   saveJSON: saveJSON,
-  getModuleResult: getModuleResult
+  getModuleResult: getModuleResult,
+  getTargetResult: getTargetResult
 };

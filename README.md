@@ -95,6 +95,17 @@
  */
 ```
 
+#### 1.3.4 handle.getTargetResult(filePath, ...props)
+```
+/**
+ * 获得模块内容之后，计算出最终返回值
+ * 如果 `saveTarget` 是一个函数，则 `...props` 将作为该函数的参数传递进去
+ *
+ * @param {*} saveTarget 有可能是函数、对象或者普通字符串
+ * @return {Promise}
+ */
+```
+
 ### 1.4 filter
 
 #### 1.4.1 filter.filterModuleInFolder(folderPath, filterFunc, callback)
