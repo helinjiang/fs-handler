@@ -1,6 +1,6 @@
 {
   "name": "fs-handler",
-  "version": "0.0.3",
+  "version": "0.1.2",
   "description": "Handle file system by Node",
   "main": "lib/index.js",
   "scripts": {
